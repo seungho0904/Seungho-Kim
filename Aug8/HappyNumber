@@ -1,0 +1,33 @@
+#You can use Floyd Cycle detection algorithm
+#Or division and modulus. and make Hashset. if the sum repeats, it return false
+
+
+
+class Solution(object):
+    
+    def isHappy(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        def floyd(n):
+            sum = 0
+            while n > 0:
+                n,d = divmod(n,10)
+                sum = sum + d*d
+            return sum
+        
+        slow = fast = n
+        while True:
+            fast = floyd(fast)
+            fast = floyd(fast)
+            slow = floyd(slow)
+            if fast == slow:
+                break
+            if fast == 1:
+                return 1
+        if slow == 1:
+            return 1
+        else:
+            return 0
+
